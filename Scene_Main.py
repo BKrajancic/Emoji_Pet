@@ -17,9 +17,9 @@ class Scene_Main():
         self.h = 320
         self.windowSurface = pygame.display.set_mode(
             (self.w, self.h))
-        self.emoji = Emoji(x=160, y=160)
+        self.emoji = Emoji(x=200, y=200)
         self.items: List[Entity] = [
-            Hat(x=50, y=50)
+            Hat(x=0, y=0)
         ]
 
         self.interaction_handler = Interaction_Handler()
@@ -46,6 +46,8 @@ class Scene_Main():
 
         for item in self.items:
             item.draw(self.windowSurface)
+
+        self.items = [i for i in self.items if i.dead == False]
 
         pygame.display.flip()
 
