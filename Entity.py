@@ -1,20 +1,23 @@
 from pygame.locals import *
 import pygame
+from Motion import *
 
 
 class Entity():
-    def __init__(self, x: int, y: int, w: int, h: int):
+    def __init__(self, x: int, y: int, scene_width, scene_height):
         # https://openmoji.org/python3 -m pip install -U pygame --user
-        self.x: float = x
-        self.y: float = y
-        self.set_motion(vel_x=3, accel_x=-0.1, vel_y=3, accel_y=-1)
+        self.terminal_velocity = 8
+        self.gravity = self.terminal_velocity / 16
 
-        self.w: float = w
-        self.h: float = h
+        self.x = Motion(-0.1, 3, x, self.terminal_velocity, scene_width, 0)
+        self.y = Motion(-0.1, 3, y, self.terminal_velocity, scene_height, 0)
+
+        self.rot: Motion = Motion(0, 0, 0, 8, 0, 0)
+
+        self.w: float = scene_width
+        self.h: float = scene_height
 
         self.dead = False
-        self.terminal_velocity = 16
-        self.gravity = self.terminal_velocity / 16
 
     def draw(self, screen):
         raise NotImplementedError()
@@ -23,60 +26,24 @@ class Entity():
         raise NotImplementedError()
 
     def update_position(self, scene_width, scene_height):
-        self.constrain_to_screen(scene_width, scene_height)
-        self.apply_acceleration()
+        #self.constrain_to_screen(scene_width, scene_height)
+        self.x.constrain(self.w, 0)
+        self.y.constrain(0, self.h)
+        self.rot.apply_acceleration()
+        self.x.apply_acceleration()
+        self.y.apply_acceleration()
+        self.y.apply_gravity(scene_height, self.gravity)
+        if (self.y.position == scene_height and self.y.velocity == 0):
+            self.x.apply_drag(self.gravity / 2)
+        self.rot.apply_terminal_velocity()
+        self.x.apply_terminal_velocity()
+        self.y.apply_terminal_velocity()
+        self.rot.apply_velocity()
+        self.x.apply_velocity()
+        self.y.apply_velocity()
 
-        self.apply_gravity(scene_height, self.gravity)
-        self.apply_terminal_velocity(self.terminal_velocity)
-        self.apply_velocity()
+    def bounce(self):
+        self.y.set_motion(-16, 0.01)
 
-    def apply_terminal_velocity(self, tv):
-        if (self.vel_x < -tv):
-            self.vel_x = -tv
-        elif (self.vel_x > tv):
-            self.vel_x = tv
-
-        if (self.vel_y < -tv):
-            self.vel_y = -tv
-        elif(self.vel_y > tv):
-            self.vel_y = tv
-
-    def constrain_to_screen(self, scene_width, scene_height):
-        if (self.x + self.w > scene_width):
-            self.vel_x = -abs(self.vel_x)
-        elif (self.x < 0):
-            self.vel_x = abs(self.vel_x)
-
-        if (self.y > scene_height):
-            self.vel_y = -abs(self.vel_y)
-        elif (self.y - self.h < 0):
-            self.vel_y = abs(self.vel_y)
-
-    def set_motion(self, vel_x, vel_y, accel_x, accel_y):
-        self.vel_x = vel_x
-        self.vel_y = vel_y
-        self.accel_x = accel_x
-        self.accel_y = accel_y
-
-    def apply_velocity(self):
-        self.x += self.vel_x
-        self.y += self.vel_y
-
-    def apply_acceleration(self):
-        previous_x = self.vel_x
-        previous_y = self.vel_y
-
-        self.vel_x += self.accel_x
-        self.vel_y += self.accel_y
-
-        if ((previous_x > 0 and self.vel_x <= 0) or (previous_x < 0 and self.vel_x >= 0)):
-            self.accel_x = 0
-            self.vel_x = 0
-
-        if ((previous_y > 0 and self.vel_y <= 0) or (previous_y < 0 and self.vel_y >= 0)):
-            self.accel_y = 0
-            self.vel_y = 0
-
-    def apply_gravity(self, scene_height, gravity):
-        if (self.y < scene_height):
-            self.accel_y = gravity
+    def roll(self, angle):
+        self.rot.set_motion(angle, 0.05)

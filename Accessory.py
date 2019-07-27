@@ -14,14 +14,13 @@ class Accessory(Entity):
         self.mood = "sunglasses"
 
         self.sprite = self.files[self.mood]
-        #pixels = self.sprite.PixelArray(self.sprite)
-        #pixels.replace(Color(255, 255, 255, 255), Color(0, 0, 255, 255))
-        self.set_motion(vel_x=1, accel_x=0.01, vel_y=1, accel_y=-1)
+        self.x.set_motion(velocity=1, acceleration=0.01)
+        self.y.set_motion(velocity=1, acceleration=-1)
 
     def get_rect(self):
         imagerect = self.sprite.get_rect()
-        imagerect.left = self.x
-        imagerect.bottom = self.y
+        imagerect.left = self.x.position
+        imagerect.bottom = self.y.position
         return imagerect
 
     def draw(self, screen):
@@ -32,8 +31,5 @@ class Accessory(Entity):
         this_rect = self.get_rect()
         other_rect = emoji.get_rect()
         if (this_rect.colliderect(other_rect)):
-            emoji.mood = self.mood
-            print("COLLIDED")
+            emoji.mood = "cowboy"
             self.dead = True
-        else:
-            print("No collusion")
