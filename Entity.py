@@ -46,4 +46,4 @@ class Entity():
         self.y.set_motion(-16, 0.01)
 
     def roll(self, angle):
-        self.rot.set_motion(angle, 0.05)
+        self.x.set_motion(angle, 0.05)
