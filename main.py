@@ -4,7 +4,7 @@ import cProfile
 
 
 def run():
-    main = Scene_Main(60, 1)
+    main = Scene_Main()
     main.loop()
 
 

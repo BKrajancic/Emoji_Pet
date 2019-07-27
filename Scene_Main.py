@@ -5,10 +5,12 @@ from pygame.locals import *
 import sys
 import math
 from Hat import *
+from INTERACTION import *
+from Interaction_Handler import *
 
 
 class Scene_Main():
-    def __init__(self, fps: int, ticks_per_frame: float):
+    def __init__(self):
         pygame.init()
 
         self.w = 320
@@ -16,21 +18,24 @@ class Scene_Main():
         self.windowSurface = pygame.display.set_mode(
             (self.w, self.h))
 
-        self.characters: List[Entity] = []
-        self.characters.append(Emoji(x=160, y=160))
-        self.characters.append(Hat(x=50, y=50))
+        self.characters: List[Entity] = [
+            Emoji(x=160, y=160),
+            Hat(x=50, y=50)
+        ]
 
-        self.ms_per_frame: int = math.floor(1000.0 / fps)
-        ticks: int = math.floor(fps * ticks_per_frame)
-        self.ms_per_ticks: int = math.floor(1000.0 / ticks)
+        self.interaction_handler = Interaction_Handler()
 
     def loop(self):
         while True:
             pygame.time.Clock().tick(60)
+            self.input()
             self.update()
             self.render()
-            self.act_on_input()
-            pygame.display.flip()
+
+    def update(self):
+        for emoji in self.characters:
+            emoji.update(self.w, self.h)
+            emoji.update_position(self.w, self.h)
 
     def render(self):
         BLACK = (0, 0, 0)
@@ -39,13 +44,18 @@ class Scene_Main():
         for emoji in self.characters:
             emoji.draw(self.windowSurface)
 
-    def update(self):
-        for emoji in self.characters:
-            emoji.update(self.w, self.h)
-            emoji.update_position(self.w, self.h)
+        pygame.display.flip()
 
-    def act_on_input(self):
-        for event in pygame.event.get():
-            if event.type == QUIT:
+    def input(self):
+        actions: List[Tuple[INTERACTION, int]] = self.interaction_handler.get()
+
+        for interaction, speed in actions:
+            if interaction is INTERACTION.BUTTON_L:
+                print("L")
+            elif interaction is INTERACTION.BUTTON_R:
+                print("R")
+            elif interaction is INTERACTION.EXIT:
                 pygame.quit()
                 sys.exit()
+            else:
+                raise NotImplementedError()

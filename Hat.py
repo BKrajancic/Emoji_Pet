@@ -16,4 +16,4 @@ class Hat(Entity):
         screen.blit(self.sprite, imagerect)
 
     def update(self, scene_width, scene_height):
-        print("Update")
+        pass

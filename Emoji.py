@@ -25,4 +25,4 @@ class Emoji(Entity):
         screen.blit(self.current, imagerect)
 
     def update(self, scene_width, scene_height):
-        print("Update")
+        pass
