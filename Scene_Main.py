@@ -61,6 +61,11 @@ class Scene_Main():
                 self.emoji.bounce()
             elif interaction is INTERACTION.ROLL:
                 self.emoji.roll(arg)
+                print("R")
+            elif interaction is INTERACTION.BUTTON_LESS_THAN:
+                print("R")
+            elif interaction is INTERACTION.BUTTON_GREATER_THAN:
+                print("R")
             elif interaction is INTERACTION.EXIT:
                 pygame.quit()
                 sys.exit()
