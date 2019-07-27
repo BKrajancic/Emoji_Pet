@@ -10,8 +10,8 @@ class Scene_Main():
     def __init__(self, fps: int, ticks_per_frame: float):
         pygame.init()
 
-        self.w = 600
-        self.h = 600
+        self.w = 320
+        self.h = 320
         self.windowSurface = pygame.display.set_mode(
             (self.w, self.h))
 
@@ -27,11 +27,11 @@ class Scene_Main():
             self.update()
             self.render()
             self.act_on_input()
-            pygame.display.update()
+            pygame.display.flip()
 
     def render(self):
         BLACK = (0, 0, 0)
-        # self.windowSurface.fill(BLACK)
+        self.windowSurface.fill(BLACK)
 
         for emoji in self.characters:
             emoji.draw(self.windowSurface)
