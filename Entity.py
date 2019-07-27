@@ -12,6 +12,7 @@ class Entity():
         self.w: float = w
         self.h: float = h
 
+        self.dead = False
         self.terminal_velocity = 16
         self.gravity = self.terminal_velocity / 16
 

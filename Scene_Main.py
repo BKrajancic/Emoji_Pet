@@ -47,6 +47,8 @@ class Scene_Main():
         for item in self.items:
             item.draw(self.windowSurface)
 
+        self.items = [i for i in self.items if i.dead == False]
+
         pygame.display.flip()
 
     def input(self):
