@@ -14,8 +14,8 @@ class Accessory(Entity):
         self.mood = "sunglasses"
 
         self.sprite = self.files[self.mood]
-        self.x.set_motion(vel=1, accel=0.01)
-        self.y.set_motion(vel=1, accel=-1)
+        self.x.set_motion(velocity=1, acceleration=0.01)
+        self.y.set_motion(velocity=1, acceleration=-1)
 
     def get_rect(self):
         imagerect = self.sprite.get_rect()
