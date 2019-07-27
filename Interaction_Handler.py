@@ -18,9 +18,9 @@ class Interaction_Handler():
                 if event.key == pygame.K_RIGHT:
                     interactions.append((INTERACTION.BUTTON_R, 0))
                 if event.key == pygame.K_UP:
-                    interactions.append((INTERACTION.ROLL, -1))
+                    interactions.append((INTERACTION.ROLL, -8))
                 if event.key == pygame.K_DOWN:
-                    interactions.append((INTERACTION.ROLL, 1))
+                    interactions.append((INTERACTION.ROLL, -8))
             elif event.type == QUIT:
                 interactions.append((INTERACTION.EXIT, 0))
         return interactions

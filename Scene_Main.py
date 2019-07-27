@@ -17,7 +17,7 @@ class Scene_Main():
         self.h = 320
         self.windowSurface = pygame.display.set_mode(
             (self.w, self.h))
-        self.emoji = Emoji(x=200, y=200, scene_width=self.w,
+        self.emoji = Emoji(x=400, y=400, scene_width=self.w,
                            scene_height=self.h)
         self.items: List[Entity] = [
             Hat(x=0, y=0, scene_width=self.w, scene_height=self.h)
@@ -57,7 +57,8 @@ class Scene_Main():
 
         for interaction, arg in actions:
             if interaction is INTERACTION.BUTTON_L:
-                self.items.append(Hat(x=10, y=50))
+                self.items.append(
+                    Hat(x=0, y=0, scene_width=self.w, scene_height=self.h))
             elif interaction is INTERACTION.BUTTON_R:
                 self.emoji.bounce()
             elif interaction is INTERACTION.ROLL:
