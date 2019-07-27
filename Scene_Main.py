@@ -4,6 +4,7 @@ import pygame
 from pygame.locals import *
 import sys
 import math
+from Hat import *
 
 
 class Scene_Main():
@@ -15,8 +16,10 @@ class Scene_Main():
         self.windowSurface = pygame.display.set_mode(
             (self.w, self.h))
 
-        self.characters: List[Emoji] = []
-        self.characters.append(Emoji())
+        self.characters: List[Entity] = []
+        self.characters.append(Emoji(x=160, y=160))
+        self.characters.append(Hat(x=50, y=50))
+
         self.ms_per_frame: int = math.floor(1000.0 / fps)
         ticks: int = math.floor(fps * ticks_per_frame)
         self.ms_per_ticks: int = math.floor(1000.0 / ticks)
@@ -39,6 +42,7 @@ class Scene_Main():
     def update(self):
         for emoji in self.characters:
             emoji.update(self.w, self.h)
+            emoji.update_position(self.w, self.h)
 
     def act_on_input(self):
         for event in pygame.event.get():
