@@ -6,7 +6,11 @@ import sys
 import math
 from Accessory import *
 from INTERACTION import *
-from Interaction_Handler import *
+from sys import platform
+if platform == "linux" or platform == "linux2":
+    from arduino_interaction_handler import *
+elif platform == "darwin":
+    from Interaction_Handler import *
 
 
 class Scene_Main():
@@ -17,6 +21,7 @@ class Scene_Main():
         self.h = 320
         self.windowSurface = pygame.display.set_mode(
             (self.w, self.h))
+
         self.emoji = Emoji(x=160, y=160, scene_width=128, scene_height=128)
         self.items: List[Entity] = [
             Accessory(x=50, y=50, w=128, h=128)
