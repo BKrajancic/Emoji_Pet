@@ -13,7 +13,7 @@ class Emoji(Entity):
             "moody": pygame.image.load("openmoji/color/72x72/1F62B.png").convert_alpha(),
             "tongue": pygame.image.load("openmoji/color/72x72/1F60B.png").convert_alpha(),
             "sad": pygame.image.load("openmoji/color/72x72/1F61F.png").convert_alpha(),
-            "cowboy": pygame.image.load("openmoji/color/72x72/1F920.png").convert()
+            "cowboy": pygame.image.load("openmoji/color/72x72/1F920.png").convert_alpha()
         }
 
         self.x.set_motion(5, -0.03)
