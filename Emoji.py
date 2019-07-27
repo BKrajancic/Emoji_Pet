@@ -9,7 +9,7 @@ class Emoji(Entity):
         # https://openmoji.org/python3 -m pip install -U pygame --user
         self.files = {
             "happy": pygame.image.load("openmoji/color/72x72/1F60A.png").convert_alpha(),
-            "moody": pygame.image.load("openmoji/color/72x72/1F62b.png").convert_alpha(),
+            "moody": pygame.image.load("openmoji/color/72x72/1F62B.png").convert_alpha(),
             "tongue": pygame.image.load("openmoji/color/72x72/1F60B.png").convert_alpha(),
             "sad": pygame.image.load("openmoji/color/72x72/1F61F.png").convert_alpha(),
             "cowboy": pygame.image.load("openmoji/color/72x72/1F920.png").convert_alpha()
