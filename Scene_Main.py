@@ -17,9 +17,9 @@ class Scene_Main():
         self.h = 320
         self.windowSurface = pygame.display.set_mode(
             (self.w, self.h))
-        self.emoji = Emoji(x=160, y=160)
+        self.emoji = Emoji(x=160, y=160, w = 128, h = 128)
         self.items: List[Entity] = [
-            Hat(x=50, y=50)
+            Hat(x=50, y=50, w = 128, h = 128)
         ]
 
         self.interaction_handler = Interaction_Handler()
@@ -54,7 +54,7 @@ class Scene_Main():
 
         for interaction, speed in actions:
             if interaction is INTERACTION.BUTTON_L:
-                self.items.append(Hat(x=10, y=50))
+                self.items.append(Hat(x=10, y=50, w = 128, h = 128))
             elif interaction is INTERACTION.BUTTON_R:
                 print("R")
             elif interaction is INTERACTION.EXIT:

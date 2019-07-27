@@ -3,14 +3,14 @@ import pygame
 
 
 class Entity():
-    def __init__(self, x: int, y: int):
+    def __init__(self, x: int, y: int, w: int, h: int):
         # https://openmoji.org/python3 -m pip install -U pygame --user
-        self.x: float = 160
-        self.y: float = 160
+        self.x: float = x
+        self.y: float = y
         self.set_motion(vel_x=3, accel_x=-0.1, vel_y=3, accel_y=-1)
 
-        self.w: float = 64
-        self.h: float = 64
+        self.w: float = w
+        self.h: float = h
 
         self.terminal_velocity = 16
         self.gravity = self.terminal_velocity / 16

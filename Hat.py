@@ -3,8 +3,8 @@ from Entity import *
 
 
 class Hat(Entity):
-    def __init__(self, x: int, y: int):
-        Entity.__init__(self, x, y)
+    def __init__(self, x: int, y: int, w: int, h: int):
+        Entity.__init__(self, x, y, w, h)
         self.sprite = pygame.image.load(
             "sprites/hat.png").convert_alpha()
         #pixels = self.sprite.PixelArray(self.sprite)
