@@ -1,11 +1,9 @@
 class Motion():
-    def __init__(self, acceleration, velocity, position, terminal_velocity, maximum, minimum):
+    def __init__(self, acceleration, velocity, position, terminal_velocity):
         self.acceleration = acceleration
         self.velocity = velocity
         self.position = position
         self.terminal_velocity = terminal_velocity
-        self.max = maximum
-        self.min = minimum
 
     def apply_velocity(self):
         self.position += self.velocity
@@ -19,14 +17,10 @@ class Motion():
             self.acceleration = 0
             self.velocity = 0
 
-    def set_motion(self, velocity, acceleration):
-        self.velocity = velocity
-        self.acceleration = acceleration
-
-    def constrain(self, padding_to_max, padding_to_min):
-        if (self.position + padding_to_max > self.max):
+    def constrain(self, padding_to_max, padding_to_min, max_pos, min_pos):
+        if (self.position + padding_to_max > max_pos):
             self.velocity = -abs(self.velocity)
-        elif (self.position - padding_to_min < self.min):
+        elif (self.position - padding_to_min < min_pos):
             self.velocity = abs(self.velocity)
 
     def apply_gravity(self, scene_height, gravity):
