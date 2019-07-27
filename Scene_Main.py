@@ -59,6 +59,10 @@ class Scene_Main():
                 self.items.append(Accessory(x=10, y=50, w = 128, h = 128))
             elif interaction is INTERACTION.BUTTON_R:
                 print("R")
+            elif interaction is INTERACTION.BUTTON_LESS_THAN:
+                print("R")
+            elif interaction is INTERACTION.BUTTON_GREATER_THAN:
+                print("R")
             elif interaction is INTERACTION.EXIT:
                 pygame.quit()
                 sys.exit()

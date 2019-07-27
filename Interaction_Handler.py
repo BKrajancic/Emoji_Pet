@@ -17,6 +17,10 @@ class Interaction_Handler():
                     interactions.append((INTERACTION.BUTTON_L, 0))
                 if event.key == pygame.K_RIGHT:
                     interactions.append((INTERACTION.BUTTON_R, 0))
+                if event.key == pygame.K_COMMA:
+                    interactions.append((INTERACTION.BUTTON_LESS_THAN, 0))
+                if event.key == pygame.K_PERIOD:
+                    interactions.append((INTERACTION.BUTTON_GREATER_THAN, 0))
             elif event.type == QUIT:
                 interactions.append((INTERACTION.EXIT, 0))
         return interactions
