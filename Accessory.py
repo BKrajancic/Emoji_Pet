@@ -2,11 +2,18 @@ import pygame
 from Entity import *
 
 
-class Hat(Entity):
+class Accessory(Entity):
     def __init__(self, x: int, y: int, w: int, h: int):
         Entity.__init__(self, x, y, w, h)
-        self.sprite = pygame.image.load(
-            "sprites/hat.png").convert_alpha()
+
+        self.files = {
+            "cowboy": pygame.image.load("sprites/hat.png").convert_alpha(),
+            "sunglasses": pygame.image.load("sprites/sunglasses.png").convert_alpha()
+        }
+
+        self.mood = "sunglasses"
+
+        self.sprite = self.files[self.mood]
         #pixels = self.sprite.PixelArray(self.sprite)
         #pixels.replace(Color(255, 255, 255, 255), Color(0, 0, 255, 255))
         self.set_motion(vel_x=1, accel_x=0.01, vel_y=1, accel_y=-1)
@@ -25,7 +32,7 @@ class Hat(Entity):
         this_rect = self.get_rect()
         other_rect = emoji.get_rect()
         if (this_rect.colliderect(other_rect)):
-            emoji.mood = "cowboy"
+            emoji.mood = self.mood
             print("COLLIDED")
             self.dead = True
         else:

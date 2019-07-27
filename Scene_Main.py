@@ -4,7 +4,7 @@ import pygame
 from pygame.locals import *
 import sys
 import math
-from Hat import *
+from Accessory import *
 from INTERACTION import *
 from Interaction_Handler import *
 
@@ -19,7 +19,7 @@ class Scene_Main():
             (self.w, self.h))
         self.emoji = Emoji(x=160, y=160, w = 128, h = 128)
         self.items: List[Entity] = [
-            Hat(x=50, y=50, w = 128, h = 128)
+            Accessory(x=50, y=50, w = 128, h = 128)
         ]
 
         self.interaction_handler = Interaction_Handler()
@@ -56,7 +56,7 @@ class Scene_Main():
 
         for interaction, speed in actions:
             if interaction is INTERACTION.BUTTON_L:
-                self.items.append(Hat(x=10, y=50, w = 128, h = 128))
+                self.items.append(Accessory(x=10, y=50, w = 128, h = 128))
             elif interaction is INTERACTION.BUTTON_R:
                 print("R")
             elif interaction is INTERACTION.EXIT:
