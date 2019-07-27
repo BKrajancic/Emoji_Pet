@@ -17,5 +17,5 @@ class Hat(Entity):
         imagerect.bottom = self.y
         screen.blit(self.sprite, imagerect)
 
-    def update(self, scene_width, scene_height):
+    def update(self, scene_width, scene_height, emoji):
         pass

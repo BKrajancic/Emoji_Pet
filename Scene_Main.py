@@ -17,9 +17,8 @@ class Scene_Main():
         self.h = 320
         self.windowSurface = pygame.display.set_mode(
             (self.w, self.h))
-
-        self.characters: List[Entity] = [
-            Emoji(x=160, y=160),
+        self.emoji = Emoji(x=160, y=160)
+        self.items: List[Entity] = [
             Hat(x=50, y=50)
         ]
 
@@ -33,16 +32,20 @@ class Scene_Main():
             self.render()
 
     def update(self):
-        for emoji in self.characters:
-            emoji.update(self.w, self.h)
-            emoji.update_position(self.w, self.h)
+        self.emoji.update(self.w, self.h)
+        self.emoji.update_position(self.w, self.h)
+
+        for item in self.items:
+            item.update(self.w, self.h, self.emoji)
+            item.update_position(self.w, self.h)
 
     def render(self):
         BLACK = (0, 0, 0)
         self.windowSurface.fill(BLACK)
+        self.emoji.draw(self.windowSurface)
 
-        for emoji in self.characters:
-            emoji.draw(self.windowSurface)
+        for item in self.items:
+            item.draw(self.windowSurface)
 
         pygame.display.flip()
 

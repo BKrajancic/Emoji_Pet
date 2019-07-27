@@ -18,7 +18,7 @@ class Entity():
     def draw(self, screen):
         raise NotImplementedError()
 
-    def update(self, scene_width, scene_height):
+    def update(self, scene_width, scene_height, emoji):
         raise NotImplementedError()
 
     def update_position(self, scene_width, scene_height):
