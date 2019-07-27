@@ -17,9 +17,10 @@ class Scene_Main():
         self.h = 320
         self.windowSurface = pygame.display.set_mode(
             (self.w, self.h))
-        self.emoji = Emoji(x=200, y=200)
+        self.emoji = Emoji(x=200, y=200, scene_width=self.w,
+                           scene_height=self.h)
         self.items: List[Entity] = [
-            Hat(x=0, y=0)
+            Hat(x=0, y=0, scene_width=self.w, scene_height=self.h)
         ]
 
         self.interaction_handler = Interaction_Handler()
@@ -54,11 +55,13 @@ class Scene_Main():
     def input(self):
         actions: List[Tuple[INTERACTION, int]] = self.interaction_handler.get()
 
-        for interaction, speed in actions:
+        for interaction, arg in actions:
             if interaction is INTERACTION.BUTTON_L:
                 self.items.append(Hat(x=10, y=50))
             elif interaction is INTERACTION.BUTTON_R:
-                print("R")
+                self.emoji.bounce()
+            elif interaction is INTERACTION.ROLL:
+                self.emoji.roll(arg)
             elif interaction is INTERACTION.EXIT:
                 pygame.quit()
                 sys.exit()
