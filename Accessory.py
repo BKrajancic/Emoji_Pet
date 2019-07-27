@@ -31,5 +31,5 @@ class Accessory(Entity):
         this_rect = self.get_rect()
         other_rect = emoji.get_rect()
         if (this_rect.colliderect(other_rect)):
-            emoji.mood = "cowboy"
+            emoji.mood = self.mood
             self.dead = True

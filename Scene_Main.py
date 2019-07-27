@@ -66,6 +66,13 @@ class Scene_Main():
                 print("R")
             elif interaction is INTERACTION.BUTTON_GREATER_THAN:
                 print("R")
+            elif interaction is INTERACTION.YEET:
+                #add accessory into frame
+                #yeet it
+                #change emoji mood to neutral
+                self.emoji.mood = "happy"
+
+
             elif interaction is INTERACTION.EXIT:
                 pygame.quit()
                 sys.exit()

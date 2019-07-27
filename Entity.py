@@ -14,8 +14,8 @@ class Entity():
 
         self.rot: Motion = Motion(0, 0, 0, 8, 0, 0)
 
-        self.w: float = scene_width
-        self.h: float = scene_height
+        self.w: float = 72
+        self.h: float = 72
 
         self.dead = False
 

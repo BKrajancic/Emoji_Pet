@@ -26,8 +26,10 @@ class Motion():
     def constrain(self, padding_to_max, padding_to_min):
         if (self.position + padding_to_max > self.max):
             self.velocity = -abs(self.velocity)
+            self.position = self.max - padding_to_max
         elif (self.position - padding_to_min < self.min):
             self.velocity = abs(self.velocity)
+            self.position = self.min - padding_to_min
 
     def apply_gravity(self, scene_height, gravity):
         if (self.position < scene_height):
@@ -48,6 +50,6 @@ class Motion():
         elif (self.velocity > self.terminal_velocity):
             self.velocity = self.terminal_velocity
 
-    def set_motion(self, vel, accel):
-        self.velocity = vel
-        self.acceleration = accel
+    def set_motion(self, velocity, acceleration):
+        self.velocity = velocity
+        self.acceleration = acceleration
