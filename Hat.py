@@ -6,7 +6,10 @@ class Hat(Entity):
     def __init__(self, x: int, y: int):
         Entity.__init__(self, x, y)
         self.sprite = pygame.image.load(
-            "openmoji/color/72x72/1F62b.png").convert_alpha()
+            "openmoji/color/72x72/1F920.png").convert_alpha()
+        self.sprite = self.sprite.subsurface((0, 0, 72, 30))
+        #pixels = self.sprite.PixelArray(self.sprite)
+        #pixels.replace(Color(255, 255, 255, 255), Color(0, 0, 255, 255))
         self.set_motion(vel_x=1, accel_x=0.01, vel_y=1, accel_y=-1)
 
     def draw(self, screen):

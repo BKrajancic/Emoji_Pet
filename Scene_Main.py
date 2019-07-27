@@ -51,7 +51,7 @@ class Scene_Main():
 
         for interaction, speed in actions:
             if interaction is INTERACTION.BUTTON_L:
-                print("L")
+                self.characters.append(Hat(x=10, y=50))
             elif interaction is INTERACTION.BUTTON_R:
                 print("R")
             elif interaction is INTERACTION.EXIT:
