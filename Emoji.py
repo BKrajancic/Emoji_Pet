@@ -45,10 +45,15 @@ class Emoji(Entity):
 
     def roll_upright(self):
         if self.x.velocity == 0 and self.angle != 0:
-            prev_angle = self.angle
-            math.floor(self.angle)
-            self.angle += self.roll_upright_speed
+            self.angle = math.floor(self.angle)
+            if (self.angle > 180):
+                self.angle += self.roll_upright_speed
+            else:
+                self.angle -= self.roll_upright_speed
+
             pre_modulo = self.angle
             self.angle %= 360
+            print("{}, {}".format(pre_modulo, self.angle))
+
             if (pre_modulo != self.angle):
                 self.angle = 0
