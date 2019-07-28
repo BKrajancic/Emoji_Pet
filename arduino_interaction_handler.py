@@ -54,9 +54,7 @@ class Arduino_Interaction_Handler():
 
     def light_sensor(self):
         sensor_value = grovepi.analogRead(self.light_sensor_pin)
-        self.light_sensor_dig = (float)
-        (1023 - sensor_value) * 10 / sensor_value
-        return self.light_sensor_dig
+        return sensor_value
 
     def get(self) -> List[Tuple[INTERACTION, int]]:
         events = pygame.event.get()
