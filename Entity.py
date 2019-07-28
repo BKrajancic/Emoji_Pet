@@ -22,16 +22,18 @@ class Entity():
         self.collide = True
         self.collide_timer = 0
 
+        self.is_constrained = True
+
     def draw(self, screen):
         raise NotImplementedError()
 
     def update(self, scene_width, scene_height, emoji):
         raise NotImplementedError()
 
-    def update_position(self, scene_width, scene_height, doContrain=True):
+    def update_position(self, scene_width, scene_height):
         #self.constrain_to_screen(scene_width, scene_height)
 
-        if(doContrain):
+        if(self.is_constrained):
             self.x.constrain(self.w, 0, scene_width, 0)
             self.y.constrain(0, self.h, scene_height, 0)
 
