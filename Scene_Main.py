@@ -9,7 +9,7 @@ from INTERACTION import *
 from Hand import *
 from sys import platform
 if platform == "linux" or platform == "linux2":
-    from arduino_interaction_handler import *
+    from Arduino_Interaction_Handler import *
 elif platform == "darwin":
     from Interaction_Handler import *
 
