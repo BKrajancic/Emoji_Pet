@@ -87,8 +87,7 @@ class Emoji(Entity):
 
         if platform == "linux" or platform == "linux2":
             if self.prev_mood != self.mood:
-                setText("I'm " + self.mood)
-                text = "I'm" + self.mood
+                text = "I'm " + self.mood
                 textCommand(0x01)  # clear display
 
                 textCommand(0x08 | 0x04)  # display on, no cursor
