@@ -20,6 +20,8 @@ class Accessory(Entity):
         self.x.set_motion(velocity=1, acceleration=0.01)
         self.y.set_motion(velocity=1, acceleration=-1)
 
+        self.lifeTime = -1
+
     def get_rect(self):
         imagerect = self.sprite.get_rect()
         imagerect.left = self.x.position
@@ -37,6 +39,11 @@ class Accessory(Entity):
         if(not self.collide and self.collide_timer>0):
             self.collide_timer -= 1
             self.collide = (self.collide_timer == 0)
+
+        if(self.lifeTime == 0):
+            self.dead = True
+        elif(self.lifeTime > 0):
+            self.lifeTime -= 1
 
         if (this_rect.colliderect(other_rect) and self.collide):
             if(emoji.mood in emoji.cool_moods):
