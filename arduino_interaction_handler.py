@@ -42,7 +42,7 @@ class Arduino_Interaction_Handler():
         if (self.light_sensor_enabled):
             self.light_sensor_pin = 2
             grovepi.pinMode(self.light_sensor_pin, "INPUT")
-            self.light_sensor_prev = self.light_sensor()
+            self.light_sensor_prev = grovepi.analogRead(self.light_sensor_pin)
 
         if (self.us1_enabled):
             self.us1_pin = 5
@@ -51,10 +51,6 @@ class Arduino_Interaction_Handler():
         if (self.us2_enabled):
             self.us2_pin = 6
             self.us2_prev = grovepi.ultrasonicRead(self.us2_pin)
-
-    def light_sensor(self):
-        sensor_value = grovepi.analogRead(self.light_sensor_pin)
-        return sensor_value
 
     def get(self) -> List[Tuple[INTERACTION, int]]:
         events = pygame.event.get()
@@ -97,8 +93,9 @@ class Arduino_Interaction_Handler():
                 interactions.append((INTERACTION.ROLL, -abs(delta)))
 
         if (self.light_sensor_enabled):
-            light = self.light_sensor()
-            delta = int(self.light_sensor_prev - light)
+            light = grovepi.analogRead(self.light_sensor_pin)
+            delta = self.light_sensor_prev - light
+
             if (abs(delta) > 3):
                 interactions.append((INTERACTION.ROLL, -abs(delta)))
             self.light_sensor_prev = light
