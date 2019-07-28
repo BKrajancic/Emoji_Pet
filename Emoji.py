@@ -32,14 +32,18 @@ class Emoji(Entity):
 
     def get_rect(self):
         img = self.current.get_rect(
-            left=self.x.position, bottom=self.y.position)
+            right = self.x.position + self.width,
+            bottom = self.y.position + self.height,
+            left = self.x.position ,
+            top = self.y.position)
         #scale_img = pygame.transform.scale(img, (self.height, self.width))
         img_center = img.center
         rot_img = pygame.transform.rotate(self.current, self.angle)
         return rot_img.get_rect(center=img_center)
 
     def get_img(self):
-        surface = pygame.transform.scale(self.current, (self.height, self.width))
+        surface = self.current
+        surface = pygame.transform.scale(surface, (self.height, self.width))
         surface = pygame.transform.rotate(surface, self.angle)
         return surface
 
