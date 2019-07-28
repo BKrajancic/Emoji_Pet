@@ -8,12 +8,13 @@ import grovepi
 
 class Arduino_Interaction_Handler():
     def __init__(self):
-        self.buttonL_enabled = False
-        self.buttonR_enabled = False
-        self.rac1_enabled = False
-        self.rac2_enabled = False
-        self.us1_enabled = True
-        self.us2_enabled = True
+        self.buttonL_enabled = True
+        self.buttonR_enabled = True
+        self.rac1_enabled = True
+        self.rac2_enabled = True
+        self.us1_enabled = False
+        self.us2_enabled = False
+        self.light_sensor_enabled = True
 
         if (self.buttonL_enabled):
             self.button_l = 3
@@ -38,6 +39,11 @@ class Arduino_Interaction_Handler():
             self.rac_2_prev = self.get_rotation(grovepi.analogRead(self.rac_2))
             grovepi.pinMode(self.rac_2, "INPUT")
 
+        if (self.light_sensor_enabled):
+            self.light_sensor_pin = 3
+            grovepi.pinMode(self.light_sensor_pin, "INPUT")
+            self.light_sensor_prev = self.light_sensor()
+
         if (self.us1_enabled):
             self.us1_pin = 5
             self.us1_prev = grovepi.ultrasonicRead(self.us1_pin)
@@ -45,6 +51,12 @@ class Arduino_Interaction_Handler():
         if (self.us2_enabled):
             self.us2_pin = 6
             self.us2_prev = grovepi.ultrasonicRead(self.us2_pin)
+
+    def light_sensor(self):
+        sensor_value = grovepi.analogRead(self.light_sensor_pin)
+        self.light_sensor_dig = (float)
+        (1023 - sensor_value) * 10 / sensor_value
+        return self.light_sensor_dig
 
     def get(self) -> List[Tuple[INTERACTION, int]]:
         events = pygame.event.get()
@@ -85,6 +97,13 @@ class Arduino_Interaction_Handler():
             delta = int(self.us2_prev - us2)
             if (abs(delta) > 3):
                 interactions.append((INTERACTION.ROLL, -abs(delta)))
+
+        if (self.light_sensor_enabled):
+            light = self.light_sensor()
+            delta = int(self.light_sensor_prev - light)
+            if (abs(delta) > 3):
+                interactions.append((INTERACTION.ROLL, -abs(delta)))
+            self.light_sensor_prev = light
 
         return interactions
 
