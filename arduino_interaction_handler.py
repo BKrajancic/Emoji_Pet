@@ -78,13 +78,13 @@ class Interaction_Handler():
             us1 = grovepi.ultrasonicRead(self.us1_pin)
             delta = int(self.us1_prev - us1)
             if (abs(delta) > 3):
-                interactions.append((INTERACTION.ROLL, delta))
+                interactions.append((INTERACTION.ROLL, abs(delta)))
 
         if (self.us2_enabled):
             us2 = grovepi.ultrasonicRead(self.us2_pin)
             delta = int(self.us2_prev - us2)
             if (abs(delta) > 3):
-                interactions.append((INTERACTION.ROLL, delta))
+                interactions.append((INTERACTION.ROLL, -abs(delta)))
 
         return interactions
 
