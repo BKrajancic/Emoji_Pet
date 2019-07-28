@@ -4,7 +4,7 @@ from Entity import *
 
 
 class Accessory(Entity):
-    def __init__(self, x: int, y: int, w: int, h: int, mood = "cowboy"):
+    def __init__(self, x: int, y: int, w: int, h: int, mood="cowboy"):
         Entity.__init__(self, x, y, w, h)
 
         self.files = {
@@ -16,7 +16,8 @@ class Accessory(Entity):
             mood = "cowboy"
         self.mood = mood
         random.seed(10)
-        self.sprite = self.files[self.mood]
+        if (self.mood in self.files):
+            self.sprite = self.files[self.mood]
         self.x.set_motion(velocity=1, acceleration=0.01)
         self.y.set_motion(velocity=1, acceleration=-1)
 
@@ -36,7 +37,7 @@ class Accessory(Entity):
         this_rect = self.get_rect()
         other_rect = emoji.get_rect()
 
-        if(not self.collide and self.collide_timer>0):
+        if(not self.collide and self.collide_timer > 0):
             self.collide_timer -= 1
             self.collide = (self.collide_timer == 0)
 
@@ -57,4 +58,4 @@ class Accessory(Entity):
 
     def yeet(self):
         self.bounce()
-        self.x.set_motion(velocity= 10*random.uniform(-1,1), acceleration=0.01)
+        self.x.set_motion(velocity=10*random.uniform(-1, 1), acceleration=0.01)
