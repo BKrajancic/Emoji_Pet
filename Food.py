@@ -30,10 +30,7 @@ class Food(Entity):
 
         if (this_rect.colliderect(other_rect) and self.collide):
             #emoji grow by 10%
-            self.emoji.rescale()
-
-
-            emoji.mood = self.mood
+            emoji.rescale()
             self.dead = True
 
     def update_position(self, scene_width, scene_height):
