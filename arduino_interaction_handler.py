@@ -40,7 +40,7 @@ class Arduino_Interaction_Handler():
             grovepi.pinMode(self.rac_2, "INPUT")
 
         if (self.light_sensor_enabled):
-            self.light_sensor_pin = 3
+            self.light_sensor_pin = 2
             grovepi.pinMode(self.light_sensor_pin, "INPUT")
             self.light_sensor_prev = self.light_sensor()
 
