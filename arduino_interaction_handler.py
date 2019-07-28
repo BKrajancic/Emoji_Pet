@@ -9,9 +9,9 @@ import grovepi
 class Interaction_Handler():
     def __init__(self):
         self.buttonL_enabled = True
-        self.buttonR_enabled = False
-        self.rac1_enabled = True
-        self.rac2_enabled = True
+        self.buttonR_enabled = True
+        self.rac1_enabled = False
+        self.rac2_enabled = False
         self.us1_enabled = True
         self.us2_enabled = True
 
