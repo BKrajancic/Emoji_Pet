@@ -7,6 +7,7 @@ import math
 from Accessory import *
 from INTERACTION import *
 from sys import platform
+from Food import *
 if platform == "linux" or platform == "linux2":
     from Arduino_Interaction_Handler import *
 else:
@@ -102,6 +103,8 @@ class Scene_Main():
                 self.yeet_accessory()
             elif interaction is INTERACTION.DISTANCE:
                 self.hand.on_input(arg)
+            elif interaction is INTERACTION.FEED:
+                self.items.append(Food(x=10, y=50, w=128, h=128))
             elif interaction is INTERACTION.EXIT:
                 pygame.quit()
                 sys.exit()

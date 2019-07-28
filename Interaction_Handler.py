@@ -32,7 +32,7 @@ class Interaction_Handler():
                 if event.key == pygame.K_y:
                     interactions.append((INTERACTION.YEET, 0))
                 if event.key == pygame.K_f:
-                    interactions.append((INTERACTION.FOOD, 0))
+                    interactions.append((INTERACTION.FEED, 0))
             elif event.type == QUIT:
                 interactions.append((INTERACTION.EXIT, 0))
         return interactions
