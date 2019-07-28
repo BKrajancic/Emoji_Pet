@@ -9,12 +9,12 @@ import grovepi
 class Interaction_Handler():
     def __init__(self):
         self.buttonL_enabled = True
-        self.buttonR_enabled = True
-        self.rac1_enabled = True
-        self.rac1_enabled = True
-        self.rac2_enabled = True
-        self.us1_enabled = True
-        self.us2_enabled = True
+        self.buttonR_enabled = False
+        self.rac1_enabled = False
+        self.rac1_enabled = False
+        self.rac2_enabled = False
+        self.us1_enabled = False
+        self.us2_enabled = False
 
         if (self.buttonL_enabled):
             self.button_l = 1
@@ -52,7 +52,9 @@ class Interaction_Handler():
         interactions: List[Tuple[INTERACTION, int]] = []
 
         if (self.buttonL_enabled):
-            if grovepi.digitalRead(self.button_l) == 1:
+            read = grovepi.digitalRead(self.button_l)
+            print(read)
+            if read == 0:
                 interactions.append((INTERACTION.BUTTON_L, 0))
 
         if (self.buttonR_enabled):
