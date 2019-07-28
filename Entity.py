@@ -23,7 +23,7 @@ class Entity():
         self.collide_timer = 0
 
         self.is_constrained = True
-        
+
     def draw(self, screen):
         raise NotImplementedError()
 
@@ -53,15 +53,9 @@ class Entity():
     def bounce(self):
         self.y.set_motion(-16, 0.01)
 
-    def roll(self, angle):
-        self.x.set_motion(angle, 0.05)
-
-    def resize(self, sizeX, sizeY):
-
-
     def get_pos(self):
         return [self.x.position, self.y.position]
 
-    def noCollide(self, time = 0):
+    def noCollide(self, time=0):
         self.collide = False
         self.collide_timer = time

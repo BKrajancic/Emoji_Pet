@@ -2,6 +2,7 @@ from pygame.locals import *
 from Entity import *
 import pygame
 import math
+from Accessory import *
 
 
 class Emoji(Entity):
@@ -14,7 +15,8 @@ class Emoji(Entity):
             "tongue": pygame.image.load("openmoji/color/72x72/1F60B.png").convert_alpha(),
             "sad": pygame.image.load("openmoji/color/72x72/1F61F.png").convert_alpha(),
             "cowboy": pygame.image.load("openmoji/color/72x72/1F920.png").convert_alpha(),
-            "sunglasses": pygame.image.load("openmoji/color/72x72/1F60E.png").convert_alpha()
+            "sunglasses": pygame.image.load("openmoji/color/72x72/1F60E.png").convert_alpha(),
+            "scared": pygame.image.load("openmoji/color/72x72/1F62F.png")
         }
 
         self.cool_moods = ["cowboy", "sunglasses"]
@@ -44,6 +46,8 @@ class Emoji(Entity):
         self.angle -= self.x.velocity
         self.angle %= 360
         self.roll_upright()
+        if (self.mood == "scared" and self.x.velocity == 0 and self.y.velocity == 0):
+            self.mood = "happy"
 
     def roll_upright(self):
         if self.x.velocity == 0 and self.angle != 0:
@@ -55,7 +59,13 @@ class Emoji(Entity):
 
             pre_modulo = self.angle
             self.angle %= 360
-            # print("{}, {}".format(pre_modulo, self.angle))
 
             if (pre_modulo != self.angle):
                 self.angle = 0
+
+    def roll(self, angle, scene_main):
+        self.x.set_motion(angle, 0.05)
+        if self.mood in ("cowboy", "sunglasses"):
+            scene_main.yeet_accessory("scared")
+
+        self.mood = "scared"

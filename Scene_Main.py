@@ -33,7 +33,6 @@ class Scene_Main():
         else:
             self.interaction_handler = Interaction_Handler()
 
-
     def loop(self):
         counter = 30
         max_counter = 30
@@ -72,11 +71,11 @@ class Scene_Main():
 
         pygame.display.flip()
 
-    def yeet_accessory(self):
+    def yeet_accessory(self, mood):
         # add accessory into frame
         # yeet it
         # change emoji mood to neutral
-        if(self.emoji.mood != "happy"):
+        if(self.emoji.mood != mood):
             flying_hat = Accessory(
                 x=self.emoji.get_pos()[0],
                 y=self.emoji.get_pos()[1] - self.emoji.h,
@@ -89,7 +88,7 @@ class Scene_Main():
             flying_hat.lifeTime = 100
             flying_hat.noCollide(50)
             self.items.append(flying_hat)
-            self.emoji.mood = "happy"
+            self.emoji.mood = mood
             print("yeet")
 
     def input(self):
@@ -102,7 +101,7 @@ class Scene_Main():
             elif interaction is INTERACTION.BUTTON_R:
                 self.emoji.bounce()
             elif interaction is INTERACTION.ROLL:
-                self.emoji.roll(arg)
+                self.emoji.roll(arg, self)
             elif interaction is INTERACTION.BUTTON_LESS_THAN:
                 self.emoji.mood = "cowboy"
             elif interaction is INTERACTION.BUTTON_GREATER_THAN:
