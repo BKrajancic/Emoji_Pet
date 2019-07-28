@@ -28,8 +28,11 @@ class Scene_Main():
             Accessory(x=50, y=50, w=128, h=128)
         ]
         self.hand = Hand()
+        if platform == "linux" or platform == "linux2":
+            self.interaction_handler = Arduino_Interaction_Handler()
+        else:
+            self.interaction_handler = Interaction_Handler()
 
-        self.interaction_handler = Interaction_Handler()
 
     def loop(self):
         counter = 30
