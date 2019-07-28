@@ -8,8 +8,11 @@ from Accessory import *
 from INTERACTION import *
 from Hand import *
 from sys import platform
+from multiprocessing import Process
+from threading import Thread, Lock
+
 if platform == "linux" or platform == "linux2":
-    from arduino_interaction_handler import *
+    from Arduino_Interaction_Handler import *
 elif platform == "darwin":
     from Interaction_Handler import *
 
@@ -28,8 +31,24 @@ class Scene_Main():
             Accessory(x=50, y=50, w=128, h=128)
         ]
         self.hand = Hand()
+        self.mut = Lock()
 
-        self.interaction_handler = Interaction_Handler()
+        if platform == "linux" or platform == "linux2":
+            self.interaction_handler = Arduino_Interaction_Handler()
+            proc = Process(target=self.input_loop)
+            proc.start()
+        else:
+            self.interaction_handler = Interaction_Handler()
+
+        self.actions: List[Tuple[INTERACTION, int]] = []
+
+    def input_loop(self):
+        while True:
+            copied = self.interaction_handler.get()
+            if len(copied) > 0:
+                self.mut.acquire()
+                self.actions = copied.copy()
+                self.mut.release()
 
     def loop(self):
         counter = 30
@@ -38,10 +57,16 @@ class Scene_Main():
             pygame.time.Clock().tick(60)
             if (counter == 0):
                 counter = max_counter
-                self.input()
+                # if platform != "linux" and platform != "linux2":
             else:
                 counter -= 1
-            events = pygame.event.get()
+
+            self.actions = self.interaction_handler.get()
+            self.mut.acquire()
+            if len(self.actions) > 0:
+                self.input(self.actions)
+                self.actions = []
+            self.mut.release()
 
             self.update()
             self.render()
@@ -83,9 +108,7 @@ class Scene_Main():
             self.items.append(flying_hat)
             self.emoji.mood = "happy"
 
-    def input(self):
-        actions: List[Tuple[INTERACTION, int]] = self.interaction_handler.get()
-
+    def input(self, actions):
         for interaction, arg in actions:
             if interaction is INTERACTION.BUTTON_L:
                 self.items.append(
