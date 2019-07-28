@@ -12,8 +12,8 @@ class Interaction_Handler():
         self.buttonR_enabled = False
         self.rac1_enabled = True
         self.rac2_enabled = True
-        self.us1_enabled = False
-        self.us2_enabled = False
+        self.us1_enabled = True
+        self.us2_enabled = True
 
         if (self.buttonL_enabled):
             self.button_l = 3
@@ -76,14 +76,14 @@ class Interaction_Handler():
 
         if (self.us1_enabled):
             us1 = grovepi.ultrasonicRead(self.us1_pin)
-            delta = int(abs(self.us1_prev - us1))
-            if (delta > 0):
+            delta = int(self.us1_prev - us1)
+            if (abs(delta) > 3):
                 interactions.append((INTERACTION.ROLL, delta))
 
         if (self.us2_enabled):
             us2 = grovepi.ultrasonicRead(self.us2_pin)
-            delta = int(abs(self.us2_prev - us2))
-            if (delta > 0):
+            delta = int(self.us2_prev - us2)
+            if (abs(delta) > 3):
                 interactions.append((INTERACTION.ROLL, delta))
 
         return interactions
