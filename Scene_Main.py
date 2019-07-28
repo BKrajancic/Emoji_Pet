@@ -18,8 +18,8 @@ class Scene_Main():
     def __init__(self):
         pygame.init()
 
-        self.w = 320
-        self.h = 320
+        self.w = 640
+        self.h = 480
         self.windowSurface = pygame.display.set_mode(
             (self.w, self.h))
 
