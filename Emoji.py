@@ -65,6 +65,12 @@ class Emoji(Entity):
         if (self.mood == "scared" and self.x.velocity == 0 and self.y.velocity == 0):
             self.mood = "happy"
 
+        if (self.w > 72):
+            self.w -= 1
+
+        if (self.w < 72):
+            self.w = 72
+
     def roll_upright(self):
         if self.x.velocity == 0 and self.angle != 0:
             self.angle = math.floor(self.angle)
