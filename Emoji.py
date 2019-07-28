@@ -3,6 +3,11 @@ from Entity import *
 import pygame
 import math
 from Accessory import *
+from sys import platform
+
+if platform == "linux" or platform == "linux2":
+    from grove_rgb_lcd import *
+    setRGB(0, 128, 64)
 
 
 class Emoji(Entity):
@@ -79,6 +84,9 @@ class Emoji(Entity):
 
         if (self.w < 72):
             self.w = 72
+
+        if platform == "linux" or platform == "linux2":
+            setText(self.mood)
 
     def roll_upright(self):
         if self.x.velocity == 0 and self.angle != 0:
