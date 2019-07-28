@@ -52,9 +52,7 @@ class Interaction_Handler():
         interactions: List[Tuple[INTERACTION, int]] = []
 
         if (self.buttonL_enabled):
-            read = grovepi.digitalRead(self.button_l)
-            print(read)
-            if read == 0:
+            if grovepi.digitalRead(self.button_l) == 1:
                 interactions.append((INTERACTION.BUTTON_L, 0))
 
         if (self.buttonR_enabled):
