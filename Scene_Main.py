@@ -8,7 +8,7 @@ from Accessory import *
 from INTERACTION import *
 from sys import platform
 if platform == "linux" or platform == "linux2":
-    from arduino_interaction_handler import *
+    from Arduino_Interaction_Handler import *
 else:
     from Interaction_Handler import *
 

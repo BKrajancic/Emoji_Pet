@@ -27,6 +27,7 @@ class Emoji(Entity):
         self.current = self.files[self.mood]
         self.angle = 0
         self.roll_upright_speed = 8
+        self.extra_y = 0
 
     def get_rect(self):
         current = pygame.transform.scale(
@@ -36,7 +37,7 @@ class Emoji(Entity):
 
         img = current.get_rect(
             left=self.x.position,
-            bottom=self.y.position
+            bottom=self.y.position + self.extra_y
         )
 
         #scale_img = pygame.transform.scale(img, (self.height, self.width))
@@ -79,8 +80,9 @@ class Emoji(Entity):
                 self.angle = 0
 
     def rescale(self):
-        self.h = int(self.h+10)
-        self.w = int(self.w+10)
+        self.h = int(self.h+12)
+        self.w = int(self.w+12)
+        self.extra_y += 3
 
     def roll(self, angle, scene_main):
         self.x.set_motion(angle, 0.05)
