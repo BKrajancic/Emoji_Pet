@@ -17,11 +17,11 @@ class Interaction_Handler():
         self.us2_enabled = False
 
         if (self.buttonL_enabled):
-            self.button_l = 1
+            self.button_l = 3
             grovepi.pinMode(self.button_l, "INPUT")
 
         if (self.buttonR_enabled):
-            self.button_r = 2
+            self.button_r = 4
             grovepi.pinMode(self.button_r, "INPUT")
 
         if self.rac1_enabled or self.rac2_enabled:
