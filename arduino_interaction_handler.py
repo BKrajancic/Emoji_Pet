@@ -10,9 +10,8 @@ class Interaction_Handler():
     def __init__(self):
         self.buttonL_enabled = True
         self.buttonR_enabled = False
-        self.rac1_enabled = False
-        self.rac1_enabled = False
-        self.rac2_enabled = False
+        self.rac1_enabled = True
+        self.rac2_enabled = True
         self.us1_enabled = False
         self.us2_enabled = False
 
@@ -30,12 +29,12 @@ class Interaction_Handler():
             self.adc_ref = 5
 
         if (self.rac1_enabled):
-            self.rac_1 = 3
+            self.rac_1 = 0
             self.rac_1_prev = self.get_rotation(grovepi.analogRead(self.rac_1))
             grovepi.pinMode(self.rac_1, "INPUT")
 
         if (self.rac2_enabled):
-            self.rac_2 = 4
+            self.rac_2 = 1
             self.rac_2_prev = self.get_rotation(grovepi.analogRead(self.rac_2))
             grovepi.pinMode(self.rac_2, "INPUT")
 
