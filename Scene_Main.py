@@ -30,9 +30,17 @@ class Scene_Main():
         self.interaction_handler = Interaction_Handler()
 
     def loop(self):
+        counter = 30
+        max_counter = 30
         while True:
             pygame.time.Clock().tick(60)
-            self.input()
+            if (counter == 0):
+                counter = max_counter
+                self.input()
+            else:
+                counter -= 1
+            events = pygame.event.get()
+
             self.update()
             self.render()
 
@@ -84,7 +92,6 @@ class Scene_Main():
                 self.emoji.bounce()
             elif interaction is INTERACTION.ROLL:
                 self.emoji.roll(arg)
-                print("R")
             elif interaction is INTERACTION.BUTTON_LESS_THAN:
                 self.emoji.mood = "cowboy"
             elif interaction is INTERACTION.BUTTON_GREATER_THAN:
