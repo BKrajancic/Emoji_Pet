@@ -28,13 +28,13 @@ class Entity():
     def update(self, scene_width, scene_height, emoji):
         raise NotImplementedError()
 
-    def update_position(self, scene_width, scene_height, doContrain = True):
+    def update_position(self, scene_width, scene_height, doContrain=True):
         #self.constrain_to_screen(scene_width, scene_height)
 
         if(doContrain):
             self.x.constrain(self.w, 0, scene_width, 0)
             self.y.constrain(0, self.h, scene_height, 0)
-            
+
         self.rot.apply_acceleration()
         self.x.apply_acceleration()
         self.y.apply_acceleration()
@@ -51,12 +51,9 @@ class Entity():
     def bounce(self):
         self.y.set_motion(-16, 0.01)
 
-    def roll(self, angle):
-        self.x.set_motion(angle, 0.05)
-
     def get_pos(self):
         return [self.x.position, self.y.position]
 
-    def noCollide(self, time = 0):
+    def noCollide(self, time=0):
         self.collide = False
         self.collide_timer = time
