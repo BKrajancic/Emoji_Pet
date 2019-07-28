@@ -19,7 +19,7 @@ class Emoji(Entity):
             "tongue": pygame.image.load("openmoji/color/72x72/1F60B.png").subsurface(10, 10, 50, 50).convert_alpha(),
             "sad": pygame.image.load("openmoji/color/72x72/1F61F.png").subsurface(10, 10, 50, 50).convert_alpha(),
             "cowboy": pygame.image.load("openmoji/color/72x72/1F920.png").subsurface(6, 6, 58, 58).convert_alpha(),
-            "sunglasses": pygame.image.load("openmoji/color/72x72/1F60E.png").subsurface(10, 10, 54, 54).convert_alpha(),
+            "sunglasses": pygame.image.load("openmoji/color/72x72/1F60E.png").subsurface(10, 10, 50, 50).convert_alpha(),
             "scared": pygame.image.load("openmoji/color/72x72/1F62F.png").subsurface(10, 10, 50, 50).convert_alpha()
         }
 
