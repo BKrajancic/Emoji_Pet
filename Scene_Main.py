@@ -36,7 +36,7 @@ class Scene_Main():
         while True:
             pygame.time.Clock().tick(60)
             if platform == "linux" or platform == "linux2":
-                events = pygame.event.get()
+                self.events = pygame.event.get()
             self.input()
             self.update()
             self.render()
