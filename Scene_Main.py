@@ -94,7 +94,7 @@ class Scene_Main():
             elif interaction is INTERACTION.YEET:
                 print("yeeet!s")
                 self.emoji.rescale()
-                self.yeet_accessory("happy")
+                self.yeet_accessory()
             elif interaction is INTERACTION.DISTANCE:
                 self.hand.on_input(arg)
             elif interaction is INTERACTION.EXIT:
