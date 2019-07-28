@@ -100,6 +100,9 @@ class Scene_Main():
                     Accessory(x=10, y=50, w=128, h=128, mood=self.emoji.mood))
             elif interaction is INTERACTION.BUTTON_R:
                 self.emoji.bounce()
+            elif interaction is INTERACTION.BOUNCE:
+                self.emoji.bounce()
+                self.yeet_accessory("happy")
             elif interaction is INTERACTION.ROLL:
                 self.emoji.roll(arg, self)
             elif interaction is INTERACTION.BUTTON_LESS_THAN:
@@ -108,7 +111,7 @@ class Scene_Main():
                 self.emoji.mood = "sunglasses"
             elif interaction is INTERACTION.YEET:
                 print("yeeet!s")
-                self.yeet_accessory()
+                self.yeet_accessory("happy")
             elif interaction is INTERACTION.DISTANCE:
                 self.hand.on_input(arg)
             elif interaction is INTERACTION.EXIT:
