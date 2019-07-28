@@ -10,7 +10,7 @@ from Hand import *
 from sys import platform
 if platform == "linux" or platform == "linux2":
     from Arduino_Interaction_Handler import *
-elif platform == "darwin":
+else:
     from Interaction_Handler import *
 
 
@@ -39,12 +39,15 @@ class Scene_Main():
         max_counter = 30
         while True:
             pygame.time.Clock().tick(60)
-            if (counter == 0):
-                counter = max_counter
-                self.input()
+            if platform == "linux" or platform == "linux2":
+                if (counter == 0):
+                    counter = max_counter
+                    self.input()
+                else:
+                    counter -= 1
+                events = pygame.event.get()
             else:
-                counter -= 1
-            events = pygame.event.get()
+                self.input()
 
             self.update()
             self.render()
@@ -105,6 +108,7 @@ class Scene_Main():
             elif interaction is INTERACTION.BUTTON_GREATER_THAN:
                 self.emoji.mood = "sunglasses"
             elif interaction is INTERACTION.YEET:
+                print("yeeet!s")
                 self.yeet_accessory()
             elif interaction is INTERACTION.DISTANCE:
                 self.hand.on_input(arg)
