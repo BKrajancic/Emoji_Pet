@@ -86,7 +86,6 @@ class Emoji(Entity):
 
         if platform == "linux" or platform == "linux2":
             setText(self.mood)
-            setRGB(0, 128, 64)
 
     def roll_upright(self):
         if self.x.velocity == 0 and self.angle != 0:
