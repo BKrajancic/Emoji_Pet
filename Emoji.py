@@ -72,10 +72,11 @@ class Emoji(Entity):
         self.height = int(self.height+10)
         self.width = int(self.width+10)
         #self.y.positon = int(self.y.position+10)
-        
+
     def roll(self, angle, scene_main):
         self.x.set_motion(angle, 0.05)
         if self.mood in ("cowboy", "sunglasses"):
-            scene_main.yeet_accessory("scared")
+            scene_main.yeet_accessory()
+            self.mood = "scared"
 
         self.mood = "scared"
