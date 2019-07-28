@@ -22,7 +22,6 @@ class Motion():
             self.velocity = -abs(self.velocity)
         elif (self.position - padding_to_min < min_pos):
             self.velocity = abs(self.velocity)
-            # self.position = self.min - padding_to_min
 
     def apply_gravity(self, scene_height, gravity):
         if (self.position < scene_height):

@@ -9,7 +9,7 @@ from INTERACTION import *
 from Hand import *
 from sys import platform
 if platform == "linux" or platform == "linux2":
-    from arduino_interaction_handler import *
+    from Arduino_Interaction_Handler import *
 elif platform == "darwin":
     from Interaction_Handler import *
 
@@ -28,8 +28,11 @@ class Scene_Main():
             Accessory(x=50, y=50, w=128, h=128)
         ]
         self.hand = Hand()
+        if platform == "linux" or platform == "linux2":
+            self.interaction_handler = Arduino_Interaction_Handler()
+        else:
+            self.interaction_handler = Interaction_Handler()
 
-        self.interaction_handler = Interaction_Handler()
 
     def loop(self):
         counter = 30
@@ -79,6 +82,8 @@ class Scene_Main():
                 mood=self.emoji.mood
             )
             flying_hat.yeet()
+            flying_hat.is_constrained = False
+            flying_hat.lifeTime = 100
             flying_hat.noCollide(50)
             self.items.append(flying_hat)
             self.emoji.mood = "happy"
