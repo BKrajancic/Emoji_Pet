@@ -88,6 +88,25 @@ class Emoji(Entity):
         if platform == "linux" or platform == "linux2":
             if self.prev_mood != self.mood:
                 setText("I'm " + self.mood)
+                text = "I'm" + self.mood
+                textCommand(0x01)  # clear display
+
+                textCommand(0x08 | 0x04)  # display on, no cursor
+                textCommand(0x28)  # 2 lines
+
+                count = 0
+                row = 0
+                for c in text:
+                    if c == '\n' or count == 16:
+                        count = 0
+                        row += 1
+                        if row == 2:
+                            break
+                        textCommand(0xc0)
+                        if c == '\n':
+                            continue
+                    count += 1
+                    bus.write_byte_data(DISPLAY_TEXT_ADDR, 0x40, ord(c))
                 self.prev_mood = self.mood
 
     def roll_upright(self):
