@@ -33,6 +33,7 @@ class Emoji(Entity):
         self.roll_upright_speed = 8
         self.shrink_rate = 0.3
         self.extra_y = 0
+        self.prev_mood = self.mood
 
     def get_rect(self):
         current = pygame.transform.scale(
@@ -85,7 +86,9 @@ class Emoji(Entity):
             self.w = 72
 
         if platform == "linux" or platform == "linux2":
-            setText("I'm " + self.mood)
+            if self.prev_mood != self.mood:
+                setText("I'm " + self.mood)
+                self.prev_mood = self.mood
 
     def roll_upright(self):
         if self.x.velocity == 0 and self.angle != 0:
