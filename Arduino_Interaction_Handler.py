@@ -62,7 +62,7 @@ class Arduino_Interaction_Handler():
 
         if (self.buttonR_enabled):
             if grovepi.digitalRead(self.button_r) == 1:
-                interactions.append((INTERACTION.BUTTON_R, 0))
+                interactions.append((INTERACTION.FEED, 0))
 
         if (self.rac1_enabled):
             rac_1_rot = self.get_rotation(grovepi.analogRead(self.rac_1))
