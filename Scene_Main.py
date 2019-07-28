@@ -34,11 +34,20 @@ class Scene_Main():
             self.interaction_handler = Interaction_Handler()
 
     def loop(self):
+        counter = 30
+        max_counter = 30
         while True:
             pygame.time.Clock().tick(60)
             if platform == "linux" or platform == "linux2":
                 self.events = pygame.event.get()
-            self.input()
+                if (counter == 0):
+                    self.input()
+                    counter = max_counter
+                else:
+                    counter -= 1
+            if platform != "linux" and platform != "linux2":
+                self.events = pygame.event.get()
+
             self.update()
             self.render()
 
