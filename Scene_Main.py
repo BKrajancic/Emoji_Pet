@@ -47,7 +47,7 @@ class Scene_Main():
                     counter -= 1
 
             if platform != "linux" and platform != "linux2":
-                self.events = pygame.event.get()
+                self.input()
 
             self.update()
             self.render()
