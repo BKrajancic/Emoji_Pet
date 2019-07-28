@@ -109,6 +109,7 @@ class Scene_Main():
                 self.emoji.mood = "sunglasses"
             elif interaction is INTERACTION.YEET:
                 print("yeeet!s")
+                self.emoji.rescale()
                 self.yeet_accessory()
             elif interaction is INTERACTION.DISTANCE:
                 self.hand.on_input(arg)
