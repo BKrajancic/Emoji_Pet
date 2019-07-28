@@ -60,17 +60,17 @@ class Interaction_Handler():
 
         if (self.rac1_enabled):
             rac_1_rot = self.get_rotation(grovepi.analogRead(self.rac_1))
-            delta = int(self.rac_1_prev - rac_1_rot)
+            delta = int(rac_1_rot - self.rac_1_prev)
             if (abs(delta) > 3):
-                p = (INTERACTION.ROLL, delta)
+                p = (INTERACTION.ROLL, delta * 3)
                 interactions.append(p)
             self.rac_1_prev = rac_1_rot
 
         if (self.rac2_enabled):
             rac_2_rot = self.get_rotation(grovepi.analogRead(self.rac_2))
-            delta = (int(self.rac_2_prev - rac_2_rot))
+            delta = (int(rac_2_rot - self.rac_2_prev))
             if (abs(delta) > 3):
-                p = (INTERACTION.ROLL, delta)
+                p = (INTERACTION.ROLL, delta * 3)
                 interactions.append(p)
             self.rac_2_prev = rac_2_rot
 
