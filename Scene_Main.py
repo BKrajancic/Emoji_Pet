@@ -96,13 +96,16 @@ class Scene_Main():
 
         for interaction, arg in actions:
             if interaction is INTERACTION.BUTTON_L:
-                self.items.append(
-                    Accessory(x=10, y=50, w=128, h=128, mood=self.emoji.mood))
+                if arg == 0:
+                    self.items.append(
+                        Accessory(x=10, y=50, w=128, h=128, mood="cowboy"))
+                else:
+                    self.items.append(
+                        Accessory(x=10, y=50, w=128, h=128, mood="sunglasses"))
             elif interaction is INTERACTION.BUTTON_R:
                 self.emoji.bounce()
             elif interaction is INTERACTION.ROLL:
                 self.emoji.roll(arg, self)
-                print("R")
             elif interaction is INTERACTION.BOUNCE:
                 if self.emoji.mood is not "scared":
                     self.emoji.bounce()

@@ -14,6 +14,7 @@ class Accessory(Entity):
 
         if(mood == "happy"):
             mood = "cowboy"
+
         self.mood = mood
         random.seed(10)
         if (self.mood in self.files):

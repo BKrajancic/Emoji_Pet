@@ -15,10 +15,14 @@ class Arduino_Interaction_Handler():
         self.us1_enabled = False
         self.us2_enabled = False
         self.light_sensor_enabled = True
+        self.switch_enabled = True
 
         if (self.buttonL_enabled):
             self.button_l = 3
             grovepi.pinMode(self.button_l, "INPUT")
+            if (self.switch_enabled):
+                self.switch_pin = 6
+                grovepi.pinMode(self.switch_pin, "INPUT")
 
         if (self.buttonR_enabled):
             self.button_r = 4
@@ -58,7 +62,11 @@ class Arduino_Interaction_Handler():
 
         if (self.buttonL_enabled):
             if grovepi.digitalRead(self.button_l) == 1:
-                interactions.append((INTERACTION.BUTTON_L, 0))
+                if self.switch_enabled:
+                    param = grovepi.digitalRead(self.switch_pin)
+                    interactions.append((INTERACTION.BUTTON_L, param))
+                else:
+                    interactions.append((INTERACTION.BUTTON_L, 0))
 
         if (self.buttonR_enabled):
             if grovepi.digitalRead(self.button_r) == 1:
