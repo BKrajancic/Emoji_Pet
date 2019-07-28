@@ -6,10 +6,11 @@ import sys
 import math
 from Accessory import *
 from INTERACTION import *
+from Hand import *
 from sys import platform
 if platform == "linux" or platform == "linux2":
     from arduino_interaction_handler import *
-else:
+elif platform == "darwin":
     from Interaction_Handler import *
 
 
@@ -23,16 +24,25 @@ class Scene_Main():
             (self.w, self.h))
 
         self.emoji = Emoji(x=160, y=160, scene_width=128, scene_height=128)
-        self.items: List[Entity] = [
+        self.items: List[Accessory] = [
             Accessory(x=50, y=50, w=128, h=128)
         ]
+        self.hand = Hand()
 
         self.interaction_handler = Interaction_Handler()
 
     def loop(self):
+        counter = 30
+        max_counter = 30
         while True:
             pygame.time.Clock().tick(60)
-            self.input()
+            if (counter == 0):
+                counter = max_counter
+                self.input()
+            else:
+                counter -= 1
+            events = pygame.event.get()
+
             self.update()
             self.render()
 
@@ -57,16 +67,16 @@ class Scene_Main():
         pygame.display.flip()
 
     def yeet_accessory(self):
-        #add accessory into frame
-        #yeet it
-        #change emoji mood to neutral
+        # add accessory into frame
+        # yeet it
+        # change emoji mood to neutral
         if(self.emoji.mood != "happy"):
             flying_hat = Accessory(
-                x= self.emoji.get_pos()[0],
+                x=self.emoji.get_pos()[0],
                 y=self.emoji.get_pos()[1] - self.emoji.h,
                 w=128,
                 h=128,
-                mood = self.emoji.mood
+                mood=self.emoji.mood
             )
             flying_hat.yeet()
             flying_hat.is_constrained = False
@@ -74,26 +84,27 @@ class Scene_Main():
             flying_hat.noCollide(50)
             self.items.append(flying_hat)
             self.emoji.mood = "happy"
+            print("yeet")
 
     def input(self):
         actions: List[Tuple[INTERACTION, int]] = self.interaction_handler.get()
 
         for interaction, arg in actions:
             if interaction is INTERACTION.BUTTON_L:
-                self.items.append(Accessory(x=10, y=50, w=128, h=128, mood = self.emoji.mood))
+                self.items.append(
+                    Accessory(x=10, y=50, w=128, h=128, mood=self.emoji.mood))
             elif interaction is INTERACTION.BUTTON_R:
                 self.emoji.bounce()
             elif interaction is INTERACTION.ROLL:
                 self.emoji.roll(arg)
-                print("R")
             elif interaction is INTERACTION.BUTTON_LESS_THAN:
                 self.emoji.mood = "cowboy"
             elif interaction is INTERACTION.BUTTON_GREATER_THAN:
                 self.emoji.mood = "sunglasses"
             elif interaction is INTERACTION.YEET:
                 self.yeet_accessory()
-
-
+            elif interaction is INTERACTION.DISTANCE:
+                self.hand.on_input(arg)
             elif interaction is INTERACTION.EXIT:
                 pygame.quit()
                 sys.exit()

@@ -8,10 +8,10 @@ import grovepi
 
 class Interaction_Handler():
     def __init__(self):
-        self.buttonL_enabled = True
+        self.buttonL_enabled = False
         self.buttonR_enabled = False
-        self.rac1_enabled = True
-        self.rac2_enabled = True
+        self.rac1_enabled = False
+        self.rac2_enabled = False
         self.us1_enabled = True
         self.us2_enabled = True
 
@@ -78,13 +78,13 @@ class Interaction_Handler():
             us1 = grovepi.ultrasonicRead(self.us1_pin)
             delta = int(self.us1_prev - us1)
             if (abs(delta) > 3):
-                interactions.append((INTERACTION.ROLL, delta))
+                interactions.append((INTERACTION.ROLL, abs(delta)))
 
         if (self.us2_enabled):
             us2 = grovepi.ultrasonicRead(self.us2_pin)
             delta = int(self.us2_prev - us2)
             if (abs(delta) > 3):
-                interactions.append((INTERACTION.ROLL, delta))
+                interactions.append((INTERACTION.ROLL, -abs(delta)))
 
         return interactions
 

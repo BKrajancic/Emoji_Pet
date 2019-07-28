@@ -19,6 +19,10 @@ class Interaction_Handler():
                     interactions.append((INTERACTION.BUTTON_R, 0))
                 if event.key == pygame.K_UP:
                     interactions.append((INTERACTION.ROLL, -8))
+                if event.key == pygame.K_0:
+                    interactions.append((INTERACTION.DISTANCE, 0))
+                if event.key == pygame.K_1:
+                    interactions.append((INTERACTION.DISTANCE, 0))
                 if event.key == pygame.K_DOWN:
                     interactions.append((INTERACTION.ROLL, -8))
                 if event.key == pygame.K_COMMA:
