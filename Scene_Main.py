@@ -30,8 +30,14 @@ class Scene_Main():
         self.interaction_handler = Interaction_Handler()
 
     def loop(self):
+        counter = 30
+        max_counter = 30
         while True:
             pygame.time.Clock().tick(60)
+            if (counter == 0):
+                counter = max_counter
+            else:
+                counter -= 1
             events = pygame.event.get()
             self.input()
             self.update()
