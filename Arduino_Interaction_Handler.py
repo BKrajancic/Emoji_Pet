@@ -95,9 +95,8 @@ class Arduino_Interaction_Handler():
         if (self.light_sensor_enabled):
             light = grovepi.analogRead(self.light_sensor_pin)
             delta = self.light_sensor_prev - light
-
-            if (abs(delta) > 3):
-                interactions.append((INTERACTION.ROLL, -abs(delta)))
+            if (delta > 50):
+                interactions.append((INTERACTION.BOUNCE, 18))
             self.light_sensor_prev = light
 
         return interactions
