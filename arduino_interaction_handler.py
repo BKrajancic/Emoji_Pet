@@ -6,7 +6,7 @@ import time
 import grovepi
 
 
-class Arduino_Interaction_Handler():
+class Interaction_Handler():
     def __init__(self):
         self.buttonL_enabled = False
         self.buttonR_enabled = False
