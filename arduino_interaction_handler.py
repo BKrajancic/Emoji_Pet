@@ -8,12 +8,13 @@ import grovepi
 
 class Arduino_Interaction_Handler():
     def __init__(self):
-        self.buttonL_enabled = False
-        self.buttonR_enabled = False
-        self.rac1_enabled = False
-        self.rac2_enabled = False
-        self.us1_enabled = True
-        self.us2_enabled = True
+        self.buttonL_enabled = True
+        self.buttonR_enabled = True
+        self.rac1_enabled = True
+        self.rac2_enabled = True
+        self.us1_enabled = False
+        self.us2_enabled = False
+        self.light_sensor_enabled = True
 
         if (self.buttonL_enabled):
             self.button_l = 3
@@ -37,6 +38,11 @@ class Arduino_Interaction_Handler():
             self.rac_2 = 1
             self.rac_2_prev = self.get_rotation(grovepi.analogRead(self.rac_2))
             grovepi.pinMode(self.rac_2, "INPUT")
+
+        if (self.light_sensor_enabled):
+            self.light_sensor_pin = 2
+            grovepi.pinMode(self.light_sensor_pin, "INPUT")
+            self.light_sensor_prev = grovepi.analogRead(self.light_sensor_pin)
 
         if (self.us1_enabled):
             self.us1_pin = 5
@@ -85,6 +91,14 @@ class Arduino_Interaction_Handler():
             delta = int(self.us2_prev - us2)
             if (abs(delta) > 3):
                 interactions.append((INTERACTION.ROLL, -abs(delta)))
+
+        if (self.light_sensor_enabled):
+            light = grovepi.analogRead(self.light_sensor_pin)
+            delta = self.light_sensor_prev - light
+
+            if (abs(delta) > 3):
+                interactions.append((INTERACTION.ROLL, -abs(delta)))
+            self.light_sensor_prev = light
 
         return interactions
 
