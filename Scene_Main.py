@@ -82,6 +82,7 @@ class Scene_Main():
             flying_hat.noCollide(50)
             self.items.append(flying_hat)
             self.emoji.mood = "happy"
+            print("yeet")
 
     def input(self):
         actions: List[Tuple[INTERACTION, int]] = self.interaction_handler.get()
