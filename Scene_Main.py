@@ -103,6 +103,11 @@ class Scene_Main():
             elif interaction is INTERACTION.ROLL:
                 self.emoji.roll(arg, self)
                 print("R")
+            elif interaction is INTERACTION.BOUNCE:
+                self.emoji.bounce()
+                if self.emoji.mood in ("cowboy", "sunglasses"):
+                    self.yeet_accessory()
+                self.emoji.mood = "scared"
             elif interaction is INTERACTION.BUTTON_LESS_THAN:
                 self.emoji.mood = "cowboy"
             elif interaction is INTERACTION.BUTTON_GREATER_THAN:
