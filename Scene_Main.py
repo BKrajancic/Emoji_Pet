@@ -69,6 +69,8 @@ class Scene_Main():
                 mood = self.emoji.mood
             )
             flying_hat.yeet()
+            flying_hat.is_constrained = False
+            flying_hat.lifeTime = 100
             flying_hat.noCollide(50)
             self.items.append(flying_hat)
             self.emoji.mood = "happy"
