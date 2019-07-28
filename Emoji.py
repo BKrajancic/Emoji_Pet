@@ -17,6 +17,8 @@ class Emoji(Entity):
             "sunglasses": pygame.image.load("openmoji/color/72x72/1F60E.png").convert_alpha()
         }
 
+        self.cool_moods = ["cowboy", "sunglasses"]
+
         self.x.set_motion(5, -0.03)
         self.y.set_motion(3, -1)
         self.mood = "happy"
@@ -53,7 +55,7 @@ class Emoji(Entity):
 
             pre_modulo = self.angle
             self.angle %= 360
-            print("{}, {}".format(pre_modulo, self.angle))
+            # print("{}, {}".format(pre_modulo, self.angle))
 
             if (pre_modulo != self.angle):
                 self.angle = 0

@@ -41,7 +41,7 @@ class Scene_Main():
         self.emoji.update_position(self.w, self.h)
 
         for item in self.items:
-            item.update(self.w, self.h, self.emoji)
+            item.update(self.w, self.h, self.emoji, self)
             item.update_position(self.w, self.h)
 
     def render(self):
@@ -56,26 +56,40 @@ class Scene_Main():
 
         pygame.display.flip()
 
+    def yeet_accessory(self):
+        #add accessory into frame
+        #yeet it
+        #change emoji mood to neutral
+        if(self.emoji.mood != "happy"):
+            flying_hat = Accessory(
+                x= self.emoji.get_pos()[0],
+                y=self.emoji.get_pos()[1] - self.emoji.h,
+                w=128,
+                h=128,
+                mood = self.emoji.mood
+            )
+            flying_hat.yeet()
+            flying_hat.noCollide(50)
+            self.items.append(flying_hat)
+            self.emoji.mood = "happy"
+
     def input(self):
         actions: List[Tuple[INTERACTION, int]] = self.interaction_handler.get()
 
         for interaction, arg in actions:
             if interaction is INTERACTION.BUTTON_L:
-                self.items.append(Accessory(x=10, y=50, w=128, h=128))
+                self.items.append(Accessory(x=10, y=50, w=128, h=128, mood = self.emoji.mood))
             elif interaction is INTERACTION.BUTTON_R:
                 self.emoji.bounce()
             elif interaction is INTERACTION.ROLL:
                 self.emoji.roll(arg)
                 print("R")
             elif interaction is INTERACTION.BUTTON_LESS_THAN:
-                print("R")
+                self.emoji.mood = "cowboy"
             elif interaction is INTERACTION.BUTTON_GREATER_THAN:
-                print("R")
+                self.emoji.mood = "sunglasses"
             elif interaction is INTERACTION.YEET:
-                #add accessory into frame
-                #yeet it
-                #change emoji mood to neutral
-                self.emoji.mood = "happy"
+                self.yeet_accessory()
 
 
             elif interaction is INTERACTION.EXIT:
